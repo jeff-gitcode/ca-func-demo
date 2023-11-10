@@ -31,4 +31,9 @@ $ func new --template "Http Trigger" --name HttpTrigger-Demo
 $ func start
 $ curl --get http://localhost:7071/api/HttpTrigger_Demo?name=JeffTest
 
+# cosmo db emulator Download the Azure Cosmos DB emulator
+
+https://localhost:8081/_explorer/index.html
+
+
 ```

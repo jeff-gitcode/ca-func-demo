@@ -1,12 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Azure.Functions.Worker.Http;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Function
 {
@@ -19,7 +14,7 @@ namespace Function
             _mediator = mediator;
         }
 
-        protected async Task<HttpResponseData> PostResponse(HttpRequestData requestData, IRequest request)
+        protected async Task<HttpResponseData> PostAsync(HttpRequestData requestData, IRequest request)
         {
             var response = requestData.CreateResponse(HttpStatusCode.OK);
 
@@ -30,7 +25,7 @@ namespace Function
             return response;
         }
 
-        protected async Task<HttpResponseData> PostResponse<TResponse>(HttpRequestData requestData, IRequest<TResponse> request)
+        protected async Task<HttpResponseData> PostAsync<TResponse>(HttpRequestData requestData, IRequest<TResponse> request)
         {
             var response = requestData.CreateResponse(HttpStatusCode.OK);
 

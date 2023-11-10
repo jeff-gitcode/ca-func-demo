@@ -7,6 +7,6 @@ public class UserRepository : IUserRepository
 {
     public async Task<User> CreateUser(User user)
     {
-        throw new NotImplementedException();
+        return user;
     }
 }

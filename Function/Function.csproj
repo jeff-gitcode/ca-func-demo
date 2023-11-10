@@ -7,15 +7,20 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <!-- <PackageReference Include="AzureExtensions.Swashbuckle" Version="3.3.2" /> -->
     <PackageReference Include="FluentValidation" Version="11.8.0" />
     <PackageReference Include="MediatR" Version="12.1.1" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.19.0" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.0.13" />
+	  <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.OpenApi" Version="1.5.1" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.14.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\Presentation\Presentation.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">

@@ -5,6 +5,7 @@ using Domain;
 using MediatR;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.Extensions.Logging;
 
 namespace Function.Users
@@ -32,18 +33,38 @@ namespace Function.Users
         //}
         private readonly ILogger _logger;
 
-        public CreateUserFunction(IMediator mediator, ILoggerFactory loggerFactory) : base(mediator)
+        public CreateUserFunction(IMediator mediator, ILoggerFactory loggerFactory)
+            : base(mediator)
         {
             _logger = loggerFactory.CreateLogger<CreateUserFunction>();
         }
 
+        [OpenApiOperation(operationId: "Run", tags: new[] { "name" })]
+        // [OpenApiSecurity(
+        //     "function_key",
+        //     SecuritySchemeType.ApiKey,
+        //     Name = "code",
+        //     In = OpenApiSecurityLocationType.Query
+        // )]
+        [OpenApiRequestBody(
+            "application/json",
+            typeof(User),
+            Description = "CreateUser"
+        )]
+        [OpenApiResponseWithBody(
+            statusCode: HttpStatusCode.OK,
+            contentType: "text/plain",
+            bodyType: typeof(string),
+            Description = "The OK response"
+        )]
         [Function("CreateUserFunction")]
-        public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequestData req)
+        public async Task<HttpResponseData> Run(
+            [HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequestData req
+        )
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
 
-            return await PostResponse(req, new CreateUserCommand(req.Convert<User>()));
+            return await PostAsync(req, new CreateUserCommand(req.Convert<User>()));
         }
-
     }
 }
