@@ -3,9 +3,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Infrastructure;
 using Application;
+using Function.Middelwares;
 
 var host = new HostBuilder()
-    .ConfigureFunctionsWorkerDefaults()
+    .ConfigureFunctionsWorkerDefaults(
+    //w =>
+    //{
+    //    //w.UseMiddleware<ExceptionLoggingMiddleware>();
+    //}
+    )
     .ConfigureOpenApi()
     .ConfigureAppConfiguration(c =>
     {

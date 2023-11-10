@@ -1,4 +1,5 @@
 using System.Net;
+using Application.Users;
 using Application.Users.Commands;
 using CleanFunctionApp.Function;
 using Domain;
@@ -48,7 +49,7 @@ namespace Function.Users
         // )]
         [OpenApiRequestBody(
             "application/json",
-            typeof(User),
+            typeof(UserDto),
             Description = "CreateUser"
         )]
         [OpenApiResponseWithBody(
@@ -64,7 +65,19 @@ namespace Function.Users
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
 
-            return await PostAsync(req, new CreateUserCommand(req.Convert<User>()));
+            try
+            {
+                var model = req.ValidateAndConvert<UserDto>();
+
+                var result = await PostAsync(req, new CreateUserCommand(model));
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }

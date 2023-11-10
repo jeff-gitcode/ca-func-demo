@@ -3,9 +3,11 @@
 ## Tech Stack
 - [x] Azure Function
 - [x] CA
-- 
-- 
-- 
+- [x] FluentValidation
+- [x] AutoMapper
+- [x] OpenApi
+- [x] Newtonsoft
+- [x] Middleware
 
 ```dotnetcli
 

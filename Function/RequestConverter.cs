@@ -6,7 +6,7 @@ namespace CleanFunctionApp.Function;
 
 public static class RequestConverter
 {
-    public static T Convert<T>(this HttpRequestData req) where T : class
+    public static T ValidateAndConvert<T>(this HttpRequestData req) where T : class
     {
         var dto = req.ReadFromJsonAsync<T>().Result;
         // Validate with FluentValidation
