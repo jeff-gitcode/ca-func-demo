@@ -11,7 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Function.Users
 {
-    public class CreateUserFunction : BaseFunction
+    public class RegisterUserFunction : BaseFunction
     {
         //private readonly ILogger _logger;
 
@@ -34,10 +34,10 @@ namespace Function.Users
         //}
         private readonly ILogger _logger;
 
-        public CreateUserFunction(IMediator mediator, ILoggerFactory loggerFactory)
+        public RegisterUserFunction(IMediator mediator, ILoggerFactory loggerFactory)
             : base(mediator)
         {
-            _logger = loggerFactory.CreateLogger<CreateUserFunction>();
+            _logger = loggerFactory.CreateLogger<RegisterUserFunction>();
         }
 
         [OpenApiOperation(operationId: "Run", tags: new[] { "name" })]
@@ -50,15 +50,15 @@ namespace Function.Users
         [OpenApiRequestBody(
             "application/json",
             typeof(UserDto),
-            Description = "CreateUser"
+            Description = "RegisterUserFunction"
         )]
         [OpenApiResponseWithBody(
             statusCode: HttpStatusCode.OK,
             contentType: "text/plain",
-            bodyType: typeof(string),
+            bodyType: typeof(User),
             Description = "The OK response"
         )]
-        [Function("CreateUserFunction")]
+        [Function("RegisterUserFunction")]
         public async Task<HttpResponseData> Run(
             [HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequestData req
         )
@@ -69,7 +69,7 @@ namespace Function.Users
             {
                 var model = req.ValidateAndConvert<UserDto>();
 
-                var result = await PostAsync(req, new CreateUserCommand(model));
+                var result = await PostAsync(req, new RegisterUserCommand(model));
 
                 return result;
             }

@@ -3,23 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{5B908B02-6FCE-4F4C-B987-F3B1036105DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{5B908B02-6FCE-4F4C-B987-F3B1036105DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{672715C3-F2EB-4AF9-A3A2-68BCD5342942}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{672715C3-F2EB-4AF9-A3A2-68BCD5342942}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Function", "Function\Function.csproj", "{479B2980-FDCA-4AC4-9699-9C797E7F1240}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Function", "Function\Function.csproj", "{479B2980-FDCA-4AC4-9699-9C797E7F1240}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{3CA5765C-1D04-4D07-A772-35805276456E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{3CA5765C-1D04-4D07-A772-35805276456E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation.csproj", "{6936315C-FD1F-4472-B52C-781F35BD4FEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Presentation\Presentation.csproj", "{6936315C-FD1F-4472-B52C-781F35BD4FEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5B908B02-6FCE-4F4C-B987-F3B1036105DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -42,5 +39,8 @@ Global
 		{6936315C-FD1F-4472-B52C-781F35BD4FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6936315C-FD1F-4472-B52C-781F35BD4FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6936315C-FD1F-4472-B52C-781F35BD4FEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
