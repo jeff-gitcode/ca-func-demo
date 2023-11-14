@@ -1,5 +1,9 @@
 ﻿using Application.Abstraction;
+using Infrastructure.CosmosDB;
 using Microsoft.Extensions.DependencyInjection;
+using Infrastructure.Jwt;
+
+// using Microsoft.Extensions.Options.ConfigurationExtensions;
 
 namespace Infrastructure
 {
@@ -7,6 +11,8 @@ namespace Infrastructure
     {
         public static void AddInfrastracture(this IServiceCollection services)
         {
+            services.AddScoped<IJwtOption, JwtOption>();
+            services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IUserRepository, UserRepository>();
         }
     }

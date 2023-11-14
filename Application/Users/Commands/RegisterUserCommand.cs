@@ -5,9 +5,11 @@ using MediatR;
 
 namespace Application.Users.Commands;
 
-public record RegisterUserCommand(UserDto user) : IRequest<User> { }
+public record RegisterUserCommand(UserDto user) : IRequest<Customer> { }
 
-public class RegisterUserCommandHandler : BaseHandler, ICommandHandler<RegisterUserCommand, User>
+public class RegisterUserCommandHandler
+    : BaseHandler,
+        ICommandHandler<RegisterUserCommand, Customer>
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
@@ -18,12 +20,15 @@ public class RegisterUserCommandHandler : BaseHandler, ICommandHandler<RegisterU
         _mapper = mapper;
     }
 
-    public async Task<User> Handle(RegisterUserCommand command, CancellationToken cancellationToken)
+    public async Task<Customer> Handle(
+        RegisterUserCommand command,
+        CancellationToken cancellationToken
+    )
     {
-            var user = _mapper.Map<User>(command.user);
+        var user = _mapper.Map<Customer>(command.user);
 
-            var response = await _userRepository.CreateUser(user);
+        var response = await _userRepository.AddItemAsync(user, default);
 
-            return await Response(response);
+        return await Response(response);
     }
 }

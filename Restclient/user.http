@@ -1,12 +1,12 @@
 @host={{$dotenv HOST}}
 
-### CreateUserFunction
-POST {{host}}/api/CreateUserFunction HTTP/1.1
+### RegisterUserFunction
+POST {{host}}/api/RegisterUserFunction HTTP/1.1
 accept: text/plain
 content-type: application/json
 
 {
-  "id": 1,
+  "id": 2,
   "name": "John",
   "role": "Admin",
   "email": "email@email.com",

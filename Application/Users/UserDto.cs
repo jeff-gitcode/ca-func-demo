@@ -33,7 +33,7 @@ namespace Application.Users
     {
         public UserMapper()
         {
-            CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<Customer, UserDto>().ReverseMap();
         }
     }
 
@@ -41,7 +41,7 @@ namespace Application.Users
     {
         public UserDtoMapper()
         {
-            CreateMap<UserDto, User>().ReverseMap();
+            CreateMap<UserDto, Customer>().ReverseMap();
         }
     }
 }

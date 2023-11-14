@@ -55,7 +55,7 @@ namespace Function.Users
         [OpenApiResponseWithBody(
             statusCode: HttpStatusCode.OK,
             contentType: "text/plain",
-            bodyType: typeof(User),
+            bodyType: typeof(Customer),
             Description = "The OK response"
         )]
         [Function("RegisterUserFunction")]
@@ -75,7 +75,6 @@ namespace Function.Users
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
