@@ -30,9 +30,20 @@ namespace Infrastructure.CosmosDB
             return response;
         }
 
-        public Task<Customer> GetByEmail(string email)
+        public async Task<Customer> GetByEmail(string email)
         {
-            throw new NotImplementedException();
+            var queryDefinition = new QueryDefinition("SELECT * FROM Customer C WHERE C.Email = @email")
+              .WithParameter("@email", email);
+
+            var iterator = _container.GetItemQueryIterator<Customer>(queryDefinition, null);
+
+            while(iterator.HasMoreResults)
+            {
+                var documents = await iterator.ReadNextAsync();
+                return documents.FirstOrDefault();
+            }
+
+            return null;
         }
     }
 }

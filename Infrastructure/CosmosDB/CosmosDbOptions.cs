@@ -2,7 +2,7 @@
 {
     public class CosmosDbOptions
     {
-        public static readonly string CosmosDb = "CosmosDb";
+        public const string CosmosDb = "CosmosDb";
         public required string EndpointUrl { get; set; }
         public required string PrimaryConnectionString { get; set; }
         public required string Database { get; set; }

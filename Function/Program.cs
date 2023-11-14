@@ -30,7 +30,7 @@ var host = new HostBuilder()
     .ConfigureServices(
         (context, services) =>
         {
-            // services.Configure<DatabaseSettingsOptions>(options => context.Configuration.GetSection("Cosmo").Bind(options));
+            services.Configure<CosmosDbOptions>(options => context.Configuration.GetSection(CosmosDbOptions.CosmosDb).Bind(options));
             //services.AddOptions<CosmosDbOptions>().Configure<IConfiguration>((s, c) =>
             //        c.GetSection(nameof(CosmosDbOptions)).Bind(s));
             var config = context.Configuration

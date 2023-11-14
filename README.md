@@ -8,7 +8,12 @@
 - [x] OpenApi
 - [x] Newtonsoft
 - [x] Middleware
-
+- [x] CosmosDB
+- ![Alt text](./doc/cosmosdb-demo.png)
+- [x] Structor
+- [x] Jwt
+- [x] Specification Pattern
+- 
 ```dotnetcli
 
 $ mkdir ca-func-demo
