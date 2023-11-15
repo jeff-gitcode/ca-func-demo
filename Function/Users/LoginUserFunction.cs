@@ -1,6 +1,7 @@
 using System.Net;
 using Application.Users;
 using Application.Users.Commands;
+using Application.Users.Queries;
 using CleanFunctionApp.Function;
 using Domain;
 using MediatR;
@@ -44,7 +45,7 @@ namespace Function.Users
 
             var model = req.ValidateAndConvert<UserDto>();
 
-            return await PostAsync(req, new LoginUserCommand(model));
+            return await PostAsync(req, new LoginUserQuery(model));
             //var response = req.CreateResponse(HttpStatusCode.OK);
             //response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
 

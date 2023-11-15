@@ -1,7 +1,9 @@
 ﻿using Application.Abstraction;
+using Application.Services;
 using Domain;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Options;
+using static Azure.Core.HttpHeader;
 
 namespace Infrastructure.CosmosDB
 {
@@ -30,14 +32,26 @@ namespace Infrastructure.CosmosDB
             return response;
         }
 
-        public async Task<Customer> GetByEmail(string email)
+        public async IAsyncEnumerable<Customer> GetAll()
         {
-            var queryDefinition = new QueryDefinition("SELECT * FROM Customer C WHERE C.Email = @email")
-              .WithParameter("@email", email);
+            var queryDefinition = new QueryDefinition(@"SELECT * FROM Customer");
 
             var iterator = _container.GetItemQueryIterator<Customer>(queryDefinition, null);
 
-            while(iterator.HasMoreResults)
+            while (iterator.HasMoreResults)
+                foreach (var item in await iterator.ReadNextAsync().ConfigureAwait(false))
+                    yield return item;
+        }
+
+        public async Task<Customer> GetByEmail(string email)
+        {
+            var queryDefinition = new QueryDefinition(
+                "SELECT * FROM Customer C WHERE C.Email = @email"
+            ).WithParameter("@email", email);
+
+            var iterator = _container.GetItemQueryIterator<Customer>(queryDefinition, null);
+
+            while (iterator.HasMoreResults)
             {
                 var documents = await iterator.ReadNextAsync();
                 return documents.FirstOrDefault();
@@ -45,5 +59,32 @@ namespace Infrastructure.CosmosDB
 
             return null;
         }
+
+        public async Task<List<Customer>> Search(Specification<Customer> specification, Pagination? pagination)
+        {
+            var results = await GetAll().ToIQueryable();
+
+            return results.Filter(specification).Paginate(pagination).ToList();
+        }
+
     }
+
+    public static class LinqHelpers
+    {
+        public static async Task<IQueryable<TSource>> ToIQueryable<TSource>(
+            this IAsyncEnumerable<TSource> source,
+            CancellationToken cancellationToken = default
+        )
+        {
+            var list = new List<TSource>();
+
+            await foreach (var element in source.WithCancellation(cancellationToken))
+            {
+                list.Add(element);
+            }
+
+            return list.AsQueryable();
+        }
+    }
+
 }

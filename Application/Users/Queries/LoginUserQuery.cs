@@ -4,17 +4,17 @@ using AutoMapper;
 using Domain;
 using MediatR;
 
-namespace Application.Users.Commands;
+namespace Application.Users.Queries;
 
-public record LoginUserCommand(UserDto user) : IRequest<Customer> { }
+public record LoginUserQuery(UserDto user) : IRequest<Customer> { }
 
-public class LoginUserCommandHandler : BaseHandler, ICommandHandler<LoginUserCommand, Customer>
+public class LoginUserQueryHandler : BaseHandler, IQueryHandler<LoginUserQuery, Customer>
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
     private readonly IJwtService _jwtService;
 
-    public LoginUserCommandHandler(
+    public LoginUserQueryHandler(
         IUserRepository userRepository,
         IMapper mapper,
         IJwtService jwtService
@@ -25,14 +25,11 @@ public class LoginUserCommandHandler : BaseHandler, ICommandHandler<LoginUserCom
         _jwtService = jwtService;
     }
 
-    public async Task<Customer> Handle(
-        LoginUserCommand command,
-        CancellationToken cancellationToken
-    )
+    public async Task<Customer> Handle(LoginUserQuery query, CancellationToken cancellationToken)
     {
-        var user = _mapper.Map<Customer>(command.user);
+        var user = _mapper.Map<Customer>(query.user);
 
-        var selectedUser = await _userRepository.GetByEmail(command.user.Email);
+        var selectedUser = await _userRepository.GetByEmail(query.user.Email);
 
         var tokens = ClaimBuilder
             .Create()

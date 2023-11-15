@@ -1,11 +1,13 @@
+using Application.Services;
 using Domain;
 
 namespace Application.Abstraction;
 
 public interface IUserRepository : IRepository<Customer>
 {
-    // User[] Search(Specification<User> specification, Pagination? pagination);
+    Task<List<Customer>> Search(Specification<Customer> specification, Pagination? pagination);
     // Task<User> CreateUser(User user);
     // User Get(int id);
     Task<Customer> GetByEmail(string email);
+    IAsyncEnumerable<Customer> GetAll();
 }
