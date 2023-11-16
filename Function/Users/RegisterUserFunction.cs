@@ -40,7 +40,7 @@ namespace Function.Users
             _logger = loggerFactory.CreateLogger<RegisterUserFunction>();
         }
 
-        [OpenApiOperation(operationId: "Run", tags: new[] { "name" })]
+        [OpenApiOperation(operationId: "Run", tags: new[] { "Customer" })]
         // [OpenApiSecurity(
         //     "function_key",
         //     SecuritySchemeType.ApiKey,

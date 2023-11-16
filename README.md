@@ -39,8 +39,7 @@ $ func new --name SearchUserFunction --template "HTTP trigger" --authlevel "anon
 $ func start
 $ curl --get http://localhost:7071/api/HttpTrigger_Demo?name=JeffTest
 
-# cosmo db emulator Download the Azure Cosmos DB emulator
-
+# cosmo db emulator Download the Azure Cosmos DB emulator and run(in command prompt)
 $ cd %ProgramFiles%\Azure Cosmos DB Emulator
 $ Microsoft.Azure.Cosmos.Emulator.exe /Port=8081
 

@@ -23,7 +23,7 @@ namespace Function.Users
         }
 
         [Function("LoginUserFunction")]
-        [OpenApiOperation(operationId: "Run", tags: new[] { "name" })]
+        [OpenApiOperation(operationId: "Run", tags: new[] { "Customer" })]
         // [OpenApiSecurity(
         //     "function_key",
         //     SecuritySchemeType.ApiKey,

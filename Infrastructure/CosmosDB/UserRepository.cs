@@ -62,9 +62,18 @@ namespace Infrastructure.CosmosDB
 
         public async Task<List<Customer>> Search(Specification<Customer> specification, Pagination? pagination)
         {
-            var results = await GetAll().ToIQueryable();
+            try
+            {
+                var results = await GetAll().ToIQueryable();
 
-            return results.Filter(specification).Paginate(pagination).ToList();
+                return results.Filter(specification).Paginate(pagination).ToList();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
     }
