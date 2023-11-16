@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Infrastructure
 {
-    public class DatabaseSettingsOptions
+    public static class InfrastructureAssembly
     {
-        public string DataBaseName { get; set; }
+        public static readonly Assembly Assembly = Assembly.GetExecutingAssembly();
     }
 }

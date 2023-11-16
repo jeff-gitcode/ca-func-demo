@@ -1,5 +1,6 @@
 ﻿using Application.Abstraction;
 using Application.Services;
+using Ardalis.GuardClauses;
 using AutoMapper;
 using Domain;
 using MediatR;
@@ -20,6 +21,10 @@ public class LoginUserQueryHandler : BaseHandler, IQueryHandler<LoginUserQuery, 
         IJwtService jwtService
     )
     {
+        Guard.Against.Null(userRepository, nameof(userRepository));
+        Guard.Against.Null(mapper, nameof(mapper));
+        Guard.Against.Null(jwtService, nameof(jwtService));
+
         _userRepository = userRepository;
         _mapper = mapper;
         _jwtService = jwtService;

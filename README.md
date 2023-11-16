@@ -14,7 +14,7 @@
 - [x] Middleware
 - [x] CosmosDB
 - ![Alt text](./doc/cosmosdb-demo.png)
-- [x] Structor
+- [x] Scrutor
 - [x] Jwt
 - [x] Specification Pattern
 - [x] Authentication
@@ -38,6 +38,30 @@ $ dotnet add .\Infrastructure\ reference .\Application\
 $ dotnet add .\Presentation\ reference .\Application\
 
 $ dotnet sln add (ls -r **//*.csproj)
+
+# FluentValidation
+$ dotnet add .\Application\ package FluentValidation 
+$ dotnet add .\Application\ package FluentValidation.DependencyInjectionExtensions 
+
+# Scrutor 
+$ dotnet add .\Infrastructure\ package Scrutor 
+
+# Ardalis.GuardClauses
+$ dotnet add .\Infrastructure\ package Ardalis.GuardClauses
+$ dotnet add .\Application\ package Ardalis.GuardClauses
+
+# AutoMapper
+$ dotnet add .\Application\ package AutoMapper
+$ dotnet add .\Application\ package AutoMapper.Extensions.Microsoft.DependencyInjection
+
+# Azure.Cosmos
+$ dotnet add .\Infrastructure\ package Microsoft.Azure.Cosmos
+
+# jwt
+$ dotnet add .\Infrastructure\ package System.IdentityModel.Tokens.Jwt
+
+# OpenAPI
+$ dotnet add .\Function\ package Microsoft.Azure.Functions.Worker.Extensions.OpenApi
 
 $ cd Function
 $ func new --template "Http Trigger" --name HttpTrigger-Demo

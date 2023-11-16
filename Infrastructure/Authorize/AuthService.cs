@@ -1,4 +1,5 @@
-﻿using Infrastructure.Jwt;
+﻿using Ardalis.GuardClauses;
+using Infrastructure.Jwt;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -11,9 +12,10 @@ namespace Infrastructure.Authorize
     {
         private readonly JwtOption _jwtOption;
         private ClaimsPrincipal? Claims { get; set; }
-
         public AuthService(IOptionsMonitor<JwtOption> jwtOption)
         {
+            Guard.Against.Null(jwtOption, nameof(jwtOption));
+
             _jwtOption = jwtOption.CurrentValue;
         }
 

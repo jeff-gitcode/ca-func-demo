@@ -1,6 +1,8 @@
 ﻿using Application.Abstraction;
 using Application.Services;
+using Ardalis.GuardClauses;
 using Domain;
+using Infrastructure.Jwt;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Options;
 
@@ -16,6 +18,9 @@ namespace Infrastructure.CosmosDB
             IOptionsMonitor<CosmosDbOptions> cosmosDbOptions
         )
         {
+            Guard.Against.Null(cosmosDbOptions.CurrentValue, nameof(cosmosDbOptions));
+            Guard.Against.Null(dbClient, nameof(dbClient));
+
             _cosmosDbOptions = cosmosDbOptions.CurrentValue;
             _container = dbClient
                 .GetDatabase(_cosmosDbOptions.Database)

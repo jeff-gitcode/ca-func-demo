@@ -1,4 +1,5 @@
 ﻿using Application.Abstraction;
+using Ardalis.GuardClauses;
 using Infrastructure.CosmosDB;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -14,6 +15,8 @@ namespace Infrastructure.Jwt
 
         public JwtService(IOptionsMonitor<JwtOption> option)
         {
+            Guard.Against.Null(option.CurrentValue, nameof(option));
+
             this._option = option.CurrentValue;
         }
 

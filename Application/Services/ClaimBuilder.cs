@@ -2,7 +2,7 @@
 
 namespace Application.Services
 {
-    internal class ClaimBuilder
+    public class ClaimBuilder
     {
         private ICollection<Claim> claims = new HashSet<Claim>();
 

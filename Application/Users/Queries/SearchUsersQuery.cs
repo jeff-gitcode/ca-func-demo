@@ -1,4 +1,5 @@
 ﻿using Application.Abstraction;
+using Ardalis.GuardClauses;
 using AutoMapper;
 using Domain;
 using MediatR;
@@ -16,6 +17,9 @@ namespace Application.Users.Queries
 
         public SearchUsersQueryHandler(IUserRepository userRepository, IMapper mapper)
         {
+            Guard.Against.Null(userRepository, nameof(userRepository));
+            Guard.Against.Null(mapper, nameof(mapper));
+
             _userRepository = userRepository;
             _mapper = mapper;
         }
