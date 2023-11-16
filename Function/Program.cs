@@ -7,6 +7,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Infrastructure.CosmosDB;
 using Microsoft.Azure.Cosmos;
 using Function;
+using Function.Middelwares;
+using Microsoft.AspNetCore.Authorization;
+using Infrastructure.Authorize;
+using Infrastructure.Jwt;
+using Microsoft.Extensions.Options;
 
 //IConfigurationRoot configuration = new ConfigurationBuilder()
 //    .SetBasePath(Directory.GetCurrentDirectory())
@@ -15,12 +20,12 @@ using Function;
 //    .Build();
 
 var host = new HostBuilder()
-    .ConfigureFunctionsWorkerDefaults(
-    //w =>
-    //{
-    //    //w.UseMiddleware<ExceptionLoggingMiddleware>();
-    //}
-    )
+    .ConfigureFunctionsWorkerDefaults(m =>
+    {
+        m.UseMiddleware<ExceptionLoggingMiddleware>();
+        m.UseMiddleware<AuthMiddleware>();
+        m.UseNewtonsoftJson();
+    })
     .ConfigureOpenApi()
     .ConfigureAppConfiguration(c =>
     {
@@ -30,12 +35,30 @@ var host = new HostBuilder()
     .ConfigureServices(
         (context, services) =>
         {
-            services.Configure<CosmosDbOptions>(options => context.Configuration.GetSection(CosmosDbOptions.CosmosDb).Bind(options));
+            services.Configure<CosmosDbOptions>(
+                options => context.Configuration.GetSection(CosmosDbOptions.CosmosDb).Bind(options)
+            );
+
+            services.Configure<JwtOption>(
+                options => context.Configuration.GetSection(JwtOption.Jwt).Bind(options)
+            );
+
+            //services
+            //    .AddOptions<JwtOption>()
+            //    .Configure<IConfiguration>((s, c) => c.GetSection(nameof(JwtOption)).Bind(s));
+
+            //services.AddSingleton<IJwtOption>(
+            //    x => x.GetRequiredService<IOptions<JwtOption>>().Value
+            //);
             //services.AddOptions<CosmosDbOptions>().Configure<IConfiguration>((s, c) =>
             //        c.GetSection(nameof(CosmosDbOptions)).Bind(s));
             var config = context.Configuration
                 .GetSection(CosmosDbOptions.CosmosDb)
                 .Get<CosmosDbOptions>();
+
+            services.AddInfrastracture();
+            services.AddApplication();
+            services.AddScoped<IAuthService, AuthService>();
 
             services.AddSingleton<CosmosClient>(
                 (cc) =>
@@ -52,9 +75,6 @@ var host = new HostBuilder()
                     return client;
                 }
             );
-
-            services.AddInfrastracture();
-            services.AddApplication();
         }
     )
     .Build();

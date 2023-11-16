@@ -3,7 +3,6 @@ using Application.Services;
 using Domain;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Options;
-using static Azure.Core.HttpHeader;
 
 namespace Infrastructure.CosmosDB
 {
@@ -27,7 +26,7 @@ namespace Infrastructure.CosmosDB
         {
             var response = await _container.CreateItemAsync<Customer>(
                 user,
-                new Microsoft.Azure.Cosmos.PartitionKey(user.Email)
+                new PartitionKey(user.Email)
             );
             return response;
         }
@@ -60,22 +59,15 @@ namespace Infrastructure.CosmosDB
             return null;
         }
 
-        public async Task<List<Customer>> Search(Specification<Customer> specification, Pagination? pagination)
+        public async Task<List<Customer>> Search(
+            Specification<Customer> specification,
+            Pagination? pagination
+        )
         {
-            try
-            {
-                var results = await GetAll().ToIQueryable();
+            var results = await GetAll().ToIQueryable();
 
-                return results.Filter(specification).Paginate(pagination).ToList();
-
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+            return results.Filter(specification).Paginate(pagination).ToList();
         }
-
     }
 
     public static class LinqHelpers
@@ -95,5 +87,4 @@ namespace Infrastructure.CosmosDB
             return list.AsQueryable();
         }
     }
-
 }

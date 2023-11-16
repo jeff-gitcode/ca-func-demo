@@ -46,6 +46,7 @@ public class LoginUserQueryHandler : BaseHandler, IQueryHandler<LoginUserQuery, 
             Name = selectedUser.Name,
             Email = selectedUser.Email,
             Password = selectedUser.Password,
+            Role = selectedUser.Role,
             Token = token
         };
 

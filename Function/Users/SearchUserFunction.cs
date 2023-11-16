@@ -1,6 +1,5 @@
 ﻿using Application.Users;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
@@ -10,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using System.Net;
 using Application.Users.Queries;
 using CleanFunctionApp.Function;
+using Function.Middelwares;
 
 namespace Function.Users
 {
@@ -24,8 +24,8 @@ namespace Function.Users
         }
 
         [Function("SearchUserFunction")]
-        //[Authorize("Admin")]
-        // [OpenApiSecurity("bearer_auth", SecuritySchemeType.Http, Scheme = OpenApiSecuritySchemeType.Bearer, BearerFormat = "JWT")]
+        [Auth("Admin")]
+        [OpenApiSecurity("bearer_auth", SecuritySchemeType.Http, Scheme = OpenApiSecuritySchemeType.Bearer, BearerFormat = "JWT")]
         [OpenApiOperation(
             operationId: "Get User By Filter",
             tags: new[] { "Customer" }
