@@ -6,9 +6,8 @@ using System.Text.Json.Serialization;
 
 namespace Application.Users
 {
-    public class UserDto : IValidateable<UserDto>
+    public class UserDto : BaseEntity, IValidateable<UserDto>
     {
-        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Role { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;

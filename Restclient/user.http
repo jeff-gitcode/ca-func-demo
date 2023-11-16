@@ -1,29 +1,51 @@
 @host={{$dotenv HOST}}
 @token={{$dotenv TOKEN}}
 
-### RegisterUserFunction
+### RegisterUserFunction(User)
 POST {{host}}/api/RegisterUserFunction HTTP/1.1
 accept: text/plain
 content-type: application/json
 
 {
-  "id": 5,
-  "name": "John",
-  "role": "Admin",
-  "email": "email@email.com",
+  "name": "Jeff",
+  "role": "User",
+  "email": "user@email.com",
   "password": "password"
 }
 
-### LoginUserFunction
+### RegisterUserFunction(Admin)
+POST {{host}}/api/RegisterUserFunction HTTP/1.1
+accept: text/plain
+content-type: application/json
+
+{
+  "name": "Admin",
+  "role": "Admin",
+  "email": "admin@email.com",
+  "password": "password"
+}
+
+### LoginUserFunction (User)
 POST {{host}}/api/LoginUserFunction HTTP/1.1
 accept: text/plain
 content-type: application/json
 
 {
-  "id": 5,
-  "name": "John",
+  "name": "Jeff",
+  "role": "User",
+  "email": "user@email.com",
+  "password": "password"
+}
+
+### LoginUserFunction (Admin)
+POST {{host}}/api/LoginUserFunction HTTP/1.1
+accept: text/plain
+content-type: application/json
+
+{
+  "name": "Admin",
   "role": "Admin",
-  "email": "email@email.com",
+  "email": "admin@email.com",
   "password": "password"
 }
 
@@ -36,5 +58,5 @@ content-type: application/json
 {
   "name": "John",
   "page": 1,
-  "size": 2
+  "size": 1
 }

@@ -21,14 +21,14 @@ namespace Infrastructure.Authorize
         {
             var token = bearerToken.Replace("Bearer ", string.Empty);
 
-            SymmetricSecurityKey key = new(Encoding.ASCII.GetBytes(_jwtOption.Secret));
+            SymmetricSecurityKey issuerSigningKey = new(Encoding.ASCII.GetBytes(_jwtOption.Secret));
 
-            SigningCredentials credentals = new(key, SecurityAlgorithms.HmacSha256);
+            SigningCredentials credentals = new(issuerSigningKey, SecurityAlgorithms.HmacSha256);
 
             var parameters = new TokenValidationParameters
             {
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = key,
+                IssuerSigningKey = issuerSigningKey,
                 ValidateIssuer = true,
                 ValidIssuer = _jwtOption.Issuer,
                 ValidateAudience = true,
@@ -43,9 +43,12 @@ namespace Infrastructure.Authorize
             if (roles != null)
             {
                 var role = Claims?.FindFirst(ClaimTypes.Role)?.Value;
+
                 if (role == null) return false;
+
                 return roles.Contains(role, StringComparer.InvariantCultureIgnoreCase);
             }
+
             return false;
         }
 

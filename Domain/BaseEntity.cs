@@ -4,7 +4,6 @@ namespace Domain
 {
     public class BaseEntity
     {
-        [JsonProperty(PropertyName = "id")]
-        public string Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
     }
 }

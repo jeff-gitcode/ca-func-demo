@@ -1,5 +1,9 @@
 # CA Azure Function Demo
 
+
+![Alt text](./doc/ca-azure-func-demo.gif)
+
+
 ## Tech Stack
 - [x] Azure Function
 - [x] CA

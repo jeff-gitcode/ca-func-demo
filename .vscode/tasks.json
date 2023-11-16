@@ -1,0 +1,110 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "clean (functions)",
+			"command": "dotnet",
+			"args": [
+				"clean",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"type": "process",
+			"problemMatcher": "$msCompile",
+			"options": {
+				"cwd": "${workspaceFolder}/Function"
+			}
+		},
+		{
+			"label": "build (functions)",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"type": "process",
+			"dependsOn": "clean (functions)",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": "$msCompile",
+			"options": {
+				"cwd": "${workspaceFolder}/Function"
+			}
+		},
+		{
+			"label": "clean release (functions)",
+			"command": "dotnet",
+			"args": [
+				"clean",
+				"--configuration",
+				"Release",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"type": "process",
+			"problemMatcher": "$msCompile",
+			"options": {
+				"cwd": "${workspaceFolder}/Function"
+			}
+		},
+		{
+			"label": "publish (functions)",
+			"command": "dotnet",
+			"args": [
+				"publish",
+				"--configuration",
+				"Release",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"type": "process",
+			"dependsOn": "clean release (functions)",
+			"problemMatcher": "$msCompile",
+			"options": {
+				"cwd": "${workspaceFolder}/Function"
+			}
+		},
+		{
+			"type": "func",
+			"dependsOn": "build (functions)",
+			"options": {
+				"cwd": "${workspaceFolder}/Function/bin/Debug/net7.0"
+			},
+			"command": "host start",
+			"isBackground": true,
+			"problemMatcher": "$func-dotnet-watch"
+		},
+		{
+			"version": "2.0.0",
+			"tasks": [
+			  {
+				"label": "runFunctionsHost",
+				"type": "shell",
+				"command": "func host start",
+				"isBackground": true,
+				"presentation": {
+				  "reveal": "always"
+				},
+				"problemMatcher": "$func-watch",
+				"options": {
+				  "env": {
+					"languageWorkers__node__arguments": "--inspect=5858"
+				  }
+				},
+				"dependsOn": "installExtensions"
+			  },
+			  {
+				"label": "installExtensions",
+				"command": "func extensions install",
+				"type": "shell",
+				"presentation": {
+				  "reveal": "always"
+				}
+			  }
+			]
+		  }
+	]
+}

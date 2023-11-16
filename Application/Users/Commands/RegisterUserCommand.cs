@@ -2,6 +2,8 @@ using Application.Abstraction;
 using AutoMapper;
 using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Http;
+using System;
 
 namespace Application.Users.Commands;
 
@@ -26,6 +28,13 @@ public class RegisterUserCommandHandler
     )
     {
         var user = _mapper.Map<Customer>(command.user);
+
+        var userExists = await _userRepository.GetByEmail(user.Email);
+
+        if (userExists != null)
+        {
+            return await Response(userExists);
+        }
 
         var response = await _userRepository.AddItemAsync(user, default);
 
