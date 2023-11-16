@@ -17,6 +17,8 @@
 - [x] Structor
 - [x] Jwt
 - [x] Specification Pattern
+- [x] Authentication
+- [x] Authorization
 - 
 ```dotnetcli
 
