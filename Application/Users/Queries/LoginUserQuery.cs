@@ -36,6 +36,9 @@ public class LoginUserQueryHandler : BaseHandler, IQueryHandler<LoginUserQuery, 
 
         var selectedUser = await _userRepository.GetByEmail(query.user.Email);
 
+        if (selectedUser == null)
+            return await Response(new Customer());
+
         var tokens = ClaimBuilder
             .Create()
             .SetEmail(user.Email)

@@ -7,11 +7,11 @@ accept: text/plain
 content-type: application/json
 
 {
-  "name": "Jeff1",
-  "role": "User1",
-  "email": "user1@email.com",
-  "password": "password1",
-  "token":"token1"
+  "name": "Jeff",
+  "role": "User",
+  "email": "user@email.com",
+  "password": "password",
+  "token":"token"
 }
 
 ### RegisterUserFunction(Admin)

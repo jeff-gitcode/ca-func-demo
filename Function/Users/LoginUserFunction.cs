@@ -43,15 +43,24 @@ namespace Function.Users
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
 
-            var model = req.ValidateAndConvert<UserDto>();
+            try
+            {
+                var model = req.ValidateAndConvert<UserDto>();
 
-            return await PostAsync(req, new LoginUserQuery(model));
-            //var response = req.CreateResponse(HttpStatusCode.OK);
-            //response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
+                return await PostAsync(req, new LoginUserQuery(model));
+                //var response = req.CreateResponse(HttpStatusCode.OK);
+                //response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
 
-            //response.WriteString("Welcome to Azure Functions!");
+                //response.WriteString("Welcome to Azure Functions!");
 
-            //return response;
+                //return response;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }
