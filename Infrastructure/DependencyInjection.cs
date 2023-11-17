@@ -20,7 +20,7 @@ namespace Infrastructure
             .FromAssemblies(
                 typeof(ApplicationAssembly).Assembly,
                 typeof(InfrastructureAssembly).Assembly)
-            .AddClasses(filter=> filter.Where(r=>r.Name.EndsWith("Repository") || r.Name.StartsWith("IJwt")))
+            .AddClasses(filter=> filter.Where(r=>r.Name.EndsWith("Repository") || r.Name.EndsWith("Service")))
             .UsingRegistrationStrategy(RegistrationStrategy.Skip)
             .AsMatchingInterface()
             .WithScopedLifetime());

@@ -7,10 +7,11 @@ accept: text/plain
 content-type: application/json
 
 {
-  "name": "Jeff",
-  "role": "User",
-  "email": "user@email.com",
-  "password": "password"
+  "name": "Jeff1",
+  "role": "User1",
+  "email": "user1@email.com",
+  "password": "password1",
+  "token":"token1"
 }
 
 ### RegisterUserFunction(Admin)
@@ -22,7 +23,8 @@ content-type: application/json
   "name": "Admin",
   "role": "Admin",
   "email": "admin@email.com",
-  "password": "password"
+  "password": "password",
+  "token":"token"
 }
 
 ### LoginUserFunction (User)
