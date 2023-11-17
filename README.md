@@ -75,5 +75,10 @@ $ Microsoft.Azure.Cosmos.Emulator.exe /Port=8081
 
 https://localhost:8081/_explorer/index.html
 
+# unit test
+$ dotnet new xunit -o Application.Tests
 
+$ dotnet add .\Application.Tests\ package Moq
+$ dotnet add .\Application.Tests\ package FluentAssertions
+$ dotnet add .\Application.Tests\ package AutoFixture.Xunit2
 ```
