@@ -87,4 +87,5 @@ $ dotnet add .\Application.Tests\ package FluentAssertions
 $ dotnet add .\Application.Tests\ package AutoFixture.Xunit2
 
 $ dotnet new xunit -o Infrastructure.Tests
+$ dotnet new xunit -o Function.Tests
 ```
