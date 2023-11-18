@@ -1,5 +1,6 @@
 # CA Azure Function Demo
 
+![Alt text](./doc/system.jpg)
 
 ![Alt text](./doc/ca-azure-func-demo.gif)
 
@@ -19,6 +20,9 @@
 - [x] Specification Pattern
 - [x] Authentication
 - [x] Authorization
+- [x] AutoFixture
+- [x] FluentAssertions
+- [x] GuardClause
 - 
 ```dotnetcli
 
