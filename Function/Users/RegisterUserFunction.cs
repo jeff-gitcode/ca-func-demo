@@ -67,7 +67,7 @@ namespace Function.Users
 
             try
             {
-                var model = req.ValidateAndConvert<UserDto>();
+                var model = await req.ValidateAndConvert<UserDto>();
 
                 var result = await PostAsync(req, new RegisterUserCommand(model));
 

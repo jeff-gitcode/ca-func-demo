@@ -48,6 +48,6 @@ namespace Function.Users
         )]
         public async Task<HttpResponseData> Run(
             [HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequestData req
-        ) => await PostAsync(req, new SearchUsersQuery(req.ValidateAndConvert<SearchUserDto>()));
+        ) => await PostAsync(req, new SearchUsersQuery(await req.ValidateAndConvert<SearchUserDto>()));
     }
 }

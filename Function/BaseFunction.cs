@@ -7,7 +7,7 @@ namespace Function
 {
     public abstract class BaseFunction
     {
-        private readonly IMediator _mediator;
+        protected readonly IMediator _mediator;
 
         protected BaseFunction(IMediator mediator)
         {

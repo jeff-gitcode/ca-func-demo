@@ -45,7 +45,7 @@ namespace Function.Users
 
             try
             {
-                var model = req.ValidateAndConvert<UserDto>();
+                var model = await req.ValidateAndConvert<UserDto>();
 
                 return await PostAsync(req, new LoginUserQuery(model));
                 //var response = req.CreateResponse(HttpStatusCode.OK);
