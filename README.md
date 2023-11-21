@@ -23,7 +23,7 @@
 - [x] AutoFixture
 - [x] FluentAssertions
 - [x] GuardClause
-- 
+- [x] Unit/Integration Tests
 ```dotnetcli
 
 $ mkdir ca-func-demo
