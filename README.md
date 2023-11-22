@@ -23,7 +23,7 @@
 - [x] AutoFixture
 - [x] FluentAssertions
 - [x] GuardClause
-- [x] Unit/Integration Tests
+- [x] Unit/Integration Tests - Testing Pyramid
 - ![Alt text](./doc/test-pyramid.jpg)
 ```dotnetcli
 
