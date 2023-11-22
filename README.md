@@ -24,6 +24,7 @@
 - [x] FluentAssertions
 - [x] GuardClause
 - [x] Unit/Integration Tests
+- ![Alt text](./doc/test-pyramid.jpg)
 ```dotnetcli
 
 $ mkdir ca-func-demo
