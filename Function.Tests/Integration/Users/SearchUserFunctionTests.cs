@@ -10,6 +10,7 @@ using System.Security.Claims;
 
 namespace Function.Tests.Integration.Users
 {
+
     [Collection(IntegrationTestsCollection.Name)]
     public class SearchUserFunctionTests
         : FunctionUnitTestBase,
