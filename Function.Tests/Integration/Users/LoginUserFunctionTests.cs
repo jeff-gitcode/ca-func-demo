@@ -1,27 +1,25 @@
 ﻿using Application.Users;
-using Function.Users;
-using Microsoft.Extensions.DependencyInjection;
 using Domain;
 using FluentAssertions;
+using Function.Users;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Function.Tests.Integration.Users
 {
-
     [Collection(IntegrationTestsCollection.Name)]
-    public class RegisterUserFunctionTests
-        : FunctionUnitTestBase,
-            IClassFixture<Program>,
-            IAsyncLifetime
+    public class LoginUserFunctionTests
+       : FunctionUnitTestBase,
+           IClassFixture<Program>,
+           IAsyncLifetime
     {
         private readonly TestProgram _program;
 
-        private readonly RegisterUserFunction? _sut;
+        private readonly LoginUserFunction? _sut;
 
-        public RegisterUserFunctionTests(TestProgram program)
+        public LoginUserFunctionTests(TestProgram program)
         {
             _program = program;
-
-            _sut = _program.ServiceProvider.GetService<RegisterUserFunction>();
+            _sut = _program.ServiceProvider.GetService<LoginUserFunction>();
         }
 
         public Task DisposeAsync()
@@ -35,7 +33,7 @@ namespace Function.Tests.Integration.Users
         }
 
         [Theory, CustomAutoData]
-        public async Task RegisterUserFunctionTests_WhenRun_ShouldReturns(UserDto userDto)
+        public async Task LoginUserFunctionTests_WhenRun_ShouldReturns(UserDto userDto)
         {
             userDto.Email = "test@test.com";
             SetRequestBody(_request, userDto);
@@ -43,6 +41,7 @@ namespace Function.Tests.Integration.Users
             var response = await _sut!.Run(_request.Object);
             var actual = GetBodyObjectFromResponse<Customer>(response);
             actual.Email.Should().BeEquivalentTo(userDto.Email);
+            actual.Token.Should().NotBeEmpty();
         }
     }
 }

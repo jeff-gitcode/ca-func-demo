@@ -61,6 +61,11 @@ namespace Function.Tests
             request.Setup(r => r.Body).Returns(bodyStream);
         }
 
+        protected void SetRequestHeaders(Mock<HttpRequestData> request, HttpHeadersCollection headers)
+        {
+            request.Setup(r => r.Headers).Returns(headers);
+        }
+
         private void SetupFunctionContext()
         {
             var services = new TestServices();

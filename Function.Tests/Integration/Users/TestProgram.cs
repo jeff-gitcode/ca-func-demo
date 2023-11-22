@@ -9,6 +9,8 @@ using Infrastructure.Jwt;
 using Microsoft.Azure.Cosmos;
 using Infrastructure;
 using Application;
+using Function.Middelwares;
+using Microsoft.Azure.Functions.Worker.Extensions.OpenApi.Extensions;
 
 namespace Function.Tests.Integration.Users
 {
@@ -17,6 +19,12 @@ namespace Function.Tests.Integration.Users
         public TestProgram()
         {
             var host = new HostBuilder()
+                .ConfigureFunctionsWorkerDefaults(m =>
+                {
+                    m.UseMiddleware<ExceptionLoggingMiddleware>();
+                    m.UseMiddleware<AuthMiddleware>();
+                    m.UseNewtonsoftJson();
+                })
                 .ConfigureAppConfiguration(c =>
                 {
                     c.AddJsonFile("local.settings.json", optional: true, reloadOnChange: true)
@@ -55,8 +63,8 @@ namespace Function.Tests.Integration.Users
                         );
 
                         services.AddTransient<RegisterUserFunction>();
-                        //services.AddTransient<LoginUserFunction>();
-                        //services.AddTransient<SearchUserFunction>();
+                        services.AddTransient<LoginUserFunction>();
+                        services.AddTransient<SearchUserFunction>();
                     }
                 )
                 // .ConfigureWebJobs(builder => builder.UseWebJobsStartup(typeof(Program), new WebJobsBuilderContext(), NullLoggerFactory.Instance))
