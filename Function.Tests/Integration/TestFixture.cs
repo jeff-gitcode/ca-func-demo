@@ -2,6 +2,7 @@
 
 namespace Function.Tests.Integration
 {
+
     public class TestFixture : IDisposable
     {
         private readonly Process hostProcess;
@@ -16,7 +17,7 @@ namespace Function.Tests.Integration
             }
         }
 
-        public int Port { get; } = 7003;
+        public int Port { get; } = 7265;
 
         public HttpClient Client
         {
