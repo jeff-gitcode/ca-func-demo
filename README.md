@@ -25,6 +25,8 @@
 - [x] GuardClause
 - [x] Unit/Integration Tests - Testing Pyramid
 - ![Alt text](./doc/test-pyramid.jpg)
+- [x] BDD - TestStack.BDDfy
+- - ![Alt text](./doc/bdd-demo.gif)
 ```dotnetcli
 
 $ mkdir ca-func-demo
@@ -80,7 +82,7 @@ $ Microsoft.Azure.Cosmos.Emulator.exe /Port=8081
 
 https://localhost:8081/_explorer/index.html
 
-# unit test
+# unit test/integration test (have to launch Cosmos DB Emulator before test)
 $ dotnet new xunit -o Application.Tests
 
 $ dotnet add .\Application.Tests\ package Moq

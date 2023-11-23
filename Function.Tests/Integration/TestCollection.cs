@@ -4,4 +4,10 @@
     public class TestCollection : ICollectionFixture<TestFixture>
     {
     }
+
+    [CollectionDefinition(nameof(CreateObjectCollection))]
+    public class CreateObjectCollection : ICollectionFixture<CreateObjectFixture>
+    {
+    }
+
 }
